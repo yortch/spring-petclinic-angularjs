@@ -24,7 +24,7 @@ import org.springframework.samples.petclinic.repository.VisitRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.cache.annotation.CacheResult;
+import javax.cache.annotation.CacheResult;
 import java.util.Collection;
 
 /**

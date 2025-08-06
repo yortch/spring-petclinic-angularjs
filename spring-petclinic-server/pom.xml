@@ -97,9 +97,8 @@
 
         <!-- EhCache -->
         <dependency>
-            <groupId>jakarta.cache</groupId>
+            <groupId>javax.cache</groupId>
             <artifactId>cache-api</artifactId>
-            <version>1.1.2</version>
         </dependency>
         <dependency>
             <groupId>org.ehcache</groupId>
