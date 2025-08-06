@@ -12,3 +12,9 @@ target/
 
 # Branch switching
 generated/
+
+#VSCode
+settings.json
+
+# Node.js
+package-lock.json
