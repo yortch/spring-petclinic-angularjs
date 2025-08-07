@@ -13,13 +13,13 @@
 	<properties>
         <node.version>v20.11.1</node.version>
         <npm.version>10.2.4</npm.version>
-        <angular.project.directory>../spring-petclinic-angular</angular.project.directory>
+        <angular.project.directory>.</angular.project.directory>
 	</properties>
 
 	<build>
 		<resources>
 			<resource>
-				<directory>${angular.project.directory}/dist/spring-petclinic-angular/browser</directory>
+				<directory>${angular.project.directory}/dist/spring-petclinic-client/browser</directory>
 			</resource>
 		</resources>
 		<plugins>
