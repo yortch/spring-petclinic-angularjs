@@ -1,0 +1,137 @@
+<div class="row">
+  <div class="col-12">
+    <h2>{{ isEditMode ? 'Edit Owner' : 'New Owner' }}</h2>
+
+    <!-- Loading State -->
+    <div *ngIf="loading" class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error" class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+
+    <!-- Owner Form -->
+    <div *ngIf="!loading" class="card">
+      <div class="card-body">
+        <form (ngSubmit)="onSubmit()" #ownerForm="ngForm">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="firstName" class="form-label">First Name *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="firstName" 
+                  name="firstName"
+                  [(ngModel)]="owner.firstName" 
+                  required
+                  #firstNameInput="ngModel"
+                />
+                <div *ngIf="firstNameInput.invalid && firstNameInput.touched" class="text-danger">
+                  First name is required.
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="lastName" 
+                  name="lastName"
+                  [(ngModel)]="owner.lastName" 
+                  required
+                  #lastNameInput="ngModel"
+                />
+                <div *ngIf="lastNameInput.invalid && lastNameInput.touched" class="text-danger">
+                  Last name is required.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="address" class="form-label">Address *</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="address" 
+              name="address"
+              [(ngModel)]="owner.address" 
+              required
+              #addressInput="ngModel"
+            />
+            <div *ngIf="addressInput.invalid && addressInput.touched" class="text-danger">
+              Address is required.
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="city" class="form-label">City *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="city" 
+                  name="city"
+                  [(ngModel)]="owner.city" 
+                  required
+                  #cityInput="ngModel"
+                />
+                <div *ngIf="cityInput.invalid && cityInput.touched" class="text-danger">
+                  City is required.
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="telephone" class="form-label">Telephone *</label>
+                <input 
+                  type="tel" 
+                  class="form-control" 
+                  id="telephone" 
+                  name="telephone"
+                  [(ngModel)]="owner.telephone" 
+                  required
+                  #telephoneInput="ngModel"
+                />
+                <div *ngIf="telephoneInput.invalid && telephoneInput.touched" class="text-danger">
+                  Telephone is required.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between">
+            <button 
+              type="button" 
+              class="btn btn-secondary"
+              (click)="onCancel()"
+              [disabled]="loading"
+            >
+              <i class="bi bi-x-circle"></i> Cancel
+            </button>
+            
+            <button 
+              type="submit" 
+              class="btn btn-primary"
+              [disabled]="loading || ownerForm.invalid"
+            >
+              <span *ngIf="loading" class="spinner-border spinner-border-sm me-1" role="status"></span>
+              <i class="bi bi-check-circle" *ngIf="!loading"></i>
+              {{ isEditMode ? 'Update Owner' : 'Create Owner' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
