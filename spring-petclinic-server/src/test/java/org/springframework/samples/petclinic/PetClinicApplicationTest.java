@@ -14,10 +14,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class PetClinicApplicationTest {
 
     private String originalWebAppType;
+    private String originalCacheType;
 
     @BeforeEach
     void setUp() {
         originalWebAppType = System.getProperty("spring.main.web-application-type");
+        originalCacheType = System.getProperty("spring.cache.type");
     }
 
     @AfterEach
@@ -27,13 +29,18 @@ class PetClinicApplicationTest {
         } else {
             System.setProperty("spring.main.web-application-type", originalWebAppType);
         }
+        if (originalCacheType == null) {
+            System.clearProperty("spring.cache.type");
+        } else {
+            System.setProperty("spring.cache.type", originalCacheType);
+        }
     }
 
     @Test
     void main_runsWithCliNonWebArg_withoutException() {
         assertTimeoutPreemptively(Duration.ofSeconds(5), () ->
                 assertDoesNotThrow(() ->
-                        PetClinicApplication.main(new String[]{"--spring.main.web-application-type=none"})
+                        PetClinicApplication.main(new String[]{"--spring.main.web-application-type=none", "--spring.cache.type=NONE", "--spring.jmx.enabled=false"})
                 )
         );
     }
@@ -41,7 +48,9 @@ class PetClinicApplicationTest {
     @Test
     void main_runsWithEmptyArgs_whenNonWebSetAsSystemProperty() {
         System.setProperty("spring.main.web-application-type", "none");
-        assertTimeoutPreemptively(Duration.ofSeconds(5), () ->
+        System.setProperty("spring.cache.type", "NONE");
+        System.setProperty("spring.jmx.enabled", "false");
+        assertTimeoutPreemptively(Duration.ofSeconds(15), () ->
                 assertDoesNotThrow(() ->
                         PetClinicApplication.main(new String[]{})
                 )

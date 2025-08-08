@@ -21,7 +21,9 @@ class CallMonitoringAspectTest {
     @BeforeEach
     void setUp() {
         aspect = new CallMonitoringAspect();
-        when(joinPoint.toShortString()).thenReturn("jp");
+        // Use lenient stubbing because some tests in this class do not invoke the aspect
+        // and therefore would otherwise trigger UnnecessaryStubbingException.
+        lenient().when(joinPoint.toShortString()).thenReturn("jp");
     }
 
     @Test

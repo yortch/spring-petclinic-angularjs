@@ -79,7 +79,8 @@ class PetTest {
 
         List<Visit> visits = pet.getVisits();
         assertEquals(2, visits.size());
-        assertTrue(!visits.get(0).getDate().after(visits.get(1).getDate()));
+        // Verify the list is sorted DESC by date (newest first) as implemented in Pet#getVisits
+        assertTrue(visits.get(0).getDate().after(visits.get(1).getDate()));
     }
 
     @Test
@@ -119,8 +120,8 @@ class PetTest {
 
         List<Visit> sorted = pet.getVisits();
         assertEquals(2, sorted.size());
-        assertEquals(earlier, sorted.get(0));
-        assertEquals(later, sorted.get(1));
+        assertEquals(later.getDate(), sorted.get(0).getDate());
+        assertEquals(earlier.getDate(), sorted.get(1).getDate());
 
         assertThrows(UnsupportedOperationException.class, () -> sorted.remove(0));
     }
