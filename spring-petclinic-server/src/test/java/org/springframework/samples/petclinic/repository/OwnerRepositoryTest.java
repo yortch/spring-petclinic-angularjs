@@ -1,13 +1,11 @@
 package org.springframework.samples.petclinic.repository;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.samples.petclinic.model.Owner;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import javax.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +14,6 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@ExtendWith(SpringExtension.class)
 @DataJpaTest
 class OwnerRepositoryTest {
 
@@ -122,14 +119,14 @@ class OwnerRepositoryTest {
     void getOne_existing_allowsAccessingProperties() {
         Owner saved = ownerRepository.saveAndFlush(newOwner("Harry", "Jones", "6 Main", "Miami", "8888888888"));
 
-        Owner ref = ownerRepository.getOne(saved.getId());
+        Owner ref = ownerRepository.getReferenceById(saved.getId());
 
         assertThat(ref.getFirstName()).isEqualTo("Harry");
     }
 
     @Test
     void getOne_nonExisting_throwsEntityNotFoundOnPropertyAccess() {
-        Owner ref = ownerRepository.getOne(Integer.MAX_VALUE);
+        Owner ref = ownerRepository.getReferenceById(Integer.MAX_VALUE);
 
         assertThrows(EntityNotFoundException.class, ref::getFirstName);
     }
