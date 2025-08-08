@@ -1,0 +1,94 @@
+/* Import Bootstrap */
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+/* Spring PetClinic Green Theme */
+:root {
+  --spring-green: #6db33f;
+  --spring-dark-green: #5fa134;
+  --spring-brown: #34302D;
+  --spring-grey: #838789;
+  --spring-light-grey: #f1f1f1;
+}
+
+/* Global styles */
+body {
+  background-color: var(--spring-light-grey);
+  color: var(--spring-brown);
+  font-family: Arial, sans-serif;
+}
+
+a {
+  color: var(--spring-dark-green);
+}
+
+a:hover {
+  color: var(--spring-dark-green);
+}
+
+/* Button styles */
+.btn-primary {
+  background-color: var(--spring-brown);
+  border-color: var(--spring-green);
+  color: var(--spring-light-grey);
+  border-width: 2px;
+  transition: border 0.15s;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: var(--spring-brown);
+  border-color: var(--spring-brown);
+}
+
+/* Navigation styles */
+.navbar {
+  background-color: var(--spring-green);
+}
+
+.navbar .nav-link {
+  color: var(--spring-light-grey) !important;
+}
+
+.navbar .nav-link:hover {
+  background-color: var(--spring-green);
+  color: var(--spring-light-grey) !important;
+}
+
+/* Table styles */
+table {
+  border-color: var(--spring-brown);
+}
+
+table thead th {
+  background-color: var(--spring-brown);
+  color: var(--spring-light-grey);
+}
+
+/* Container styles */
+.container {
+  margin-top: 20px;
+  margin-bottom: 40px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+h1 {
+  margin-bottom: 15px;
+}
+
+.text-muted {
+  margin: 20px 0;
+}
+
+code {
+  font-size: 80%;
+}
+
+.help-block {
+  color: #666; /* Lighter version of spring-brown */
+}
+
+hr {
+  border-top: 1px dotted var(--spring-brown);
+}
