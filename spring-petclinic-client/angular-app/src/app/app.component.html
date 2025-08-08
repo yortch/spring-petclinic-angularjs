@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="assets/spring-logo-dataflow.png" alt="Spring" height="24">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/welcome" routerLinkActive="active">
+            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+            Home
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="ownersDropdown" role="button" data-bs-toggle="dropdown">
+            Owners
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="/owners">
+              <span class="glyphicon glyphicon-search" aria-hidden="true"></span> All
+            </a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/vets" routerLinkActive="active">
+            <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+            Veterinarians
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
