@@ -2,8 +2,8 @@ package org.springframework.samples.petclinic.model;
 
 import org.junit.jupiter.api.Test;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 import static org.junit.jupiter.api.Assertions.*;
 

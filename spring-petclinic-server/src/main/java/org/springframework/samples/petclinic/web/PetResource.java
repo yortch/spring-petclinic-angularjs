@@ -16,7 +16,6 @@
 package org.springframework.samples.petclinic.web;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.samples.petclinic.model.Owner;
@@ -25,7 +24,7 @@ import org.springframework.samples.petclinic.model.PetType;
 import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.Size;
 
 import java.util.Collection;
 import java.util.Date;
@@ -40,7 +39,6 @@ public class PetResource extends AbstractResourceController {
 
     private final ClinicService clinicService;
 
-    @Autowired
     public PetResource(ClinicService clinicService) {
         this.clinicService = clinicService;
     }
@@ -54,7 +52,7 @@ public class PetResource extends AbstractResourceController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void processCreationForm(
             @RequestBody PetRequest petRequest,
-            @PathVariable("ownerId") int ownerId) {
+            @PathVariable int ownerId) {
 
         Pet pet = new Pet();
         Owner owner = this.clinicService.findOwnerById(ownerId);
@@ -84,7 +82,7 @@ public class PetResource extends AbstractResourceController {
     }
 
     @GetMapping("/owners/*/pets/{petId}")
-    public PetDetails findPet(@PathVariable("petId") int petId) {
+    public PetDetails findPet(@PathVariable int petId) {
         Pet pet = this.clinicService.findPetById(petId);
         return new PetDetails(pet);
     }
