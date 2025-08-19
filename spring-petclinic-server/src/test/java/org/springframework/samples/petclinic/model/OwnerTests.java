@@ -1,6 +1,6 @@
 package org.springframework.samples.petclinic.model;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
