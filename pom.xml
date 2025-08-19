@@ -17,6 +17,7 @@
 	<modules>
 		<module>spring-petclinic-client</module>
 		<module>spring-petclinic-server</module>
+		<module>spring-petclinic-ui-tests</module>
 	</modules>
 
 	<dependencyManagement>
