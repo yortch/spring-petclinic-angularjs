@@ -86,11 +86,11 @@
                         </goals>
                         <configuration>
                             <mainClass>com.microsoft.playwright.CLI</mainClass>
-                            <args>
-                                <arg>install</arg>
-                                <arg>--with-deps</arg>
-                                <arg>chromium</arg>
-                            </args>
+                            <arguments>
+                                <argument>install</argument>
+                                <argument>--with-deps</argument>
+                                <argument>chromium</argument>
+                            </arguments>
                         </configuration>
                     </execution>
                 </executions>

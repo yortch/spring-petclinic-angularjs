@@ -16,8 +16,6 @@
 package org.springframework.samples.petclinic.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.beans.support.MutableSortDefinition;
-import org.springframework.beans.support.PropertyComparator;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -101,7 +99,15 @@ public class Pet extends NamedEntity {
 
     public List<Visit> getVisits() {
         List<Visit> sortedVisits = new ArrayList<>(getVisitsInternal());
-        PropertyComparator.sort(sortedVisits, new MutableSortDefinition("date", false, false));
+        // Sort by date descending, then by ID ascending for stable sorting
+        sortedVisits.sort((v1, v2) -> {
+            int dateComparison = v2.getDate().compareTo(v1.getDate()); // descending date
+            if (dateComparison != 0) {
+                return dateComparison;
+            }
+            // If dates are equal, sort by ID ascending for consistency
+            return Integer.compare(v1.getId(), v2.getId());
+        });
         return Collections.unmodifiableList(sortedVisits);
     }
 
