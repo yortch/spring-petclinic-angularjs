@@ -53,10 +53,12 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Temporarily commented out for upgrade testing
         <dependency>
             <groupId>org.springframework.samples</groupId>
             <artifactId>spring-petclinic-client</artifactId>
         </dependency>
+        -->
 
         <!-- JDBC drivers -->
         <dependency>
