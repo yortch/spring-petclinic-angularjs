@@ -9,9 +9,9 @@
     </parent>
 
     <properties>
-        <java.version>21</java.version>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
 	<groupId>org.springframework.samples</groupId>
@@ -21,8 +21,7 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<!-- Temporarily disabled for upgrade -->
-		<!-- <module>spring-petclinic-client</module> -->
+		<module>spring-petclinic-client</module>
 		<module>spring-petclinic-server</module>
 		<module>spring-petclinic-ui-tests</module>
 	</modules>
