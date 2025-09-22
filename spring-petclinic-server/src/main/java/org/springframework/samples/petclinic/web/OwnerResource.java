@@ -18,6 +18,7 @@ package org.springframework.samples.petclinic.web;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.service.ClinicService;
@@ -90,6 +91,9 @@ public class OwnerResource extends AbstractResourceController {
     @RequestMapping(value = "/owners/{ownerId}", method = RequestMethod.PUT)
     public Owner updateOwner(@PathVariable("ownerId") int ownerId, @Valid @RequestBody Owner ownerRequest) {
     	Owner ownerModel = retrieveOwner(ownerId);
+    	if (ownerModel == null) {
+    		throw new ObjectRetrievalFailureException(Owner.class, ownerId);
+    	}
     	// This is done by hand for simplicity purpose. In a real life use-case we should consider using MapStruct.
     	ownerModel.setFirstName(ownerRequest.getFirstName());
     	ownerModel.setLastName(ownerRequest.getLastName());
