@@ -99,7 +99,7 @@
 
         <!-- EhCache -->
         <dependency>
-            <groupId>javax.cache</groupId>
+            <groupId>jakarta.cache</groupId>
             <artifactId>cache-api</artifactId>
         </dependency>
         <dependency>
