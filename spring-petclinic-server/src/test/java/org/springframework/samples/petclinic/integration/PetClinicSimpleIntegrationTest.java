@@ -22,6 +22,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.samples.petclinic.PetClinicApplication;
 import org.springframework.samples.petclinic.service.ClinicService;
@@ -76,7 +77,7 @@ public class PetClinicSimpleIntegrationTest {
         
         // The application should respond (even if it redirects or returns content)
         assertNotNull(response, "Response should not be null");
-        HttpStatus status = response.getStatusCode();
+        HttpStatusCode status = response.getStatusCode();
         
         // Accept various success codes (200, 302 redirect, etc.)
         assertTrue(status.is2xxSuccessful() || status.is3xxRedirection(), 
@@ -110,8 +111,8 @@ public class PetClinicSimpleIntegrationTest {
         assertNotNull(healthResponse, "Health endpoint should respond");
         
         // Health endpoint should return 200 or 503 (service unavailable is also acceptable)
-        HttpStatus healthStatus = healthResponse.getStatusCode();
-        assertTrue(healthStatus == HttpStatus.OK || healthStatus == HttpStatus.SERVICE_UNAVAILABLE, 
+        HttpStatusCode healthStatus = healthResponse.getStatusCode();
+        assertTrue(healthStatus.isSameCodeAs(HttpStatus.OK) || healthStatus.isSameCodeAs(HttpStatus.SERVICE_UNAVAILABLE), 
                    "Health endpoint should return valid status");
     }
 
