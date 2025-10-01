@@ -15,6 +15,8 @@ test.describe('Pet Management Tests', () => {
     
     const firstOwnerLink = page.locator('tbody tr:first-child a').first();
     await firstOwnerLink.click();
+    await page.waitForURL('**/#!/owners/details/*');
+    await page.waitForLoadState('networkidle');
     
     // Click "Add New Pet" button
     await ownerDetailsPage.clickAddPet();

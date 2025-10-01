@@ -19,6 +19,7 @@ test.describe('Navigation and Form Validation Tests', () => {
     // Navigate to owners list
     await welcomePage.clickOwnersAll();
     await page.waitForURL('**/#!/owners');
+    await page.waitForLoadState('networkidle');
     expect(await ownerListPage.ownersHeading.isVisible()).toBe(true);
     
     // Navigate to veterinarians
@@ -220,34 +221,37 @@ test.describe('Navigation and Form Validation Tests', () => {
     const firstOwnerLink = page.locator('tbody tr:first-child a').first();
     if (await firstOwnerLink.isVisible()) {
       await firstOwnerLink.click();
+      // Wait for navigation to owner details page
+      await page.waitForURL('**/#!/owners/details/*');
+      await page.waitForLoadState('networkidle');
       
       // Try to add a pet with invalid date
       const addPetButton = page.locator('a:has-text("Add New Pet")');
-      if (await addPetButton.isVisible()) {
-        await addPetButton.click();
-        await page.waitForURL('**/#!/owners/*/new-pet');
-        
-        // Fill form with name and pet type
-        await page.locator('input[ng-model="$ctrl.pet.name"]').fill('Test Pet');
-        
-        if (await page.locator('select[ng-model="$ctrl.petTypeId"]').isVisible()) {
-          await page.locator('select[ng-model="$ctrl.petTypeId"]').selectOption('1');
-        }
-        
-        // Set invalid date directly via AngularJS model (bypassing HTML5 validation)
-        await page.evaluate(() => {
-          const scope = (window as any).angular.element(document.querySelector('input[ng-model="$ctrl.pet.birthDate"]')).scope();
-          scope.$ctrl.pet.birthDate = 'invalid-date';
-          scope.$apply();
-        });
-        
-        // Try to submit the form
-        await page.locator('button[type="submit"]').click();
-        
-        // Should stay on form due to invalid date or show error
-        await page.waitForTimeout(500);
-        expect(page.url()).toContain('/new-pet');
+      await addPetButton.waitFor({ state: 'visible', timeout: 5000 });
+      await addPetButton.click();
+      await page.waitForURL('**/#!/owners/*/new-pet');
+      await page.waitForLoadState('networkidle');
+      
+      // Fill form with name and pet type
+      await page.locator('input[ng-model="$ctrl.pet.name"]').fill('Test Pet');
+      
+      if (await page.locator('select[ng-model="$ctrl.petTypeId"]').isVisible()) {
+        await page.locator('select[ng-model="$ctrl.petTypeId"]').selectOption('1');
       }
+      
+      // Set invalid date directly via AngularJS model (bypassing HTML5 validation)
+      await page.evaluate(() => {
+        const scope = (window as any).angular.element(document.querySelector('input[ng-model="$ctrl.pet.birthDate"]')).scope();
+        scope.$ctrl.pet.birthDate = 'invalid-date';
+        scope.$apply();
+      });
+      
+      // Try to submit the form
+      await page.locator('button[type="submit"]').click();
+      
+      // Should stay on form due to invalid date or show error
+      await page.waitForTimeout(500);
+      expect(page.url()).toContain('/new-pet');
     }
   });
 

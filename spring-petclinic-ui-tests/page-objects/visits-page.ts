@@ -14,10 +14,10 @@ export class VisitsPage extends BasePage {
   constructor(page: Page) {
     super(page);
     this.visitsHeading = page.locator('h2');
-    this.addVisitButton = page.locator('button:has-text("Add Visit"), a:has-text("Add Visit")');
+    this.addVisitButton = page.locator('button:has-text("Add New Visit"), button:has-text("Add Visit"), a:has-text("Add Visit")');
     this.visitForm = page.locator('form');
     this.visitDateInput = page.locator('input[name="date"], input[type="date"]');
-    this.visitDescriptionTextarea = page.locator('textarea[name="description"]');
+    this.visitDescriptionTextarea = page.locator('textarea[ng-model="$ctrl.desc"], textarea[name="description"]');
     this.submitVisitButton = page.locator('button[type="submit"]');
     this.visitsTable = page.locator('table');
     this.petInfo = page.locator('.table-condensed, .pet-info');
