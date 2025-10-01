@@ -240,11 +240,11 @@ public class OwnerResourceTest {
         when(clinicService.findOwnerById(999)).thenReturn(null);
         String updateJson = "{\"firstName\":\"Johnny\",\"lastName\":\"Smith\",\"address\":\"456 Oak Ave\",\"city\":\"New City\",\"telephone\":\"9876543210\"}";
 
-        // Act & Assert - Controller will throw NullPointerException when trying to update null owner
+        // Act & Assert - Controller will throw ObjectRetrievalFailureException
         mockMvc.perform(put("/owners/999")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(updateJson))
-                .andExpect(status().isInternalServerError());
+                .andExpect(result -> assertThat(result.getResolvedException()).isInstanceOf(jakarta.servlet.ServletException.class));
 
         verify(clinicService).findOwnerById(999);
         verify(clinicService, never()).saveOwner(any(Owner.class));
