@@ -1,0 +1,29 @@
+{
+  "name": "spring-petclinic-ui-tests",
+  "version": "1.0.0",
+  "description": "UI tests for Spring PetClinic AngularJS application using Playwright",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:debug": "playwright test --debug",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "start-server": "node utils/start-server.js",
+    "stop-server": "node utils/stop-server.js",
+    "test:with-server": "npm run start-server && npm test && npm run stop-server"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "playwright",
+    "testing",
+    "ui-tests",
+    "spring-boot",
+    "angularjs"
+  ],
+  "author": "",
+  "license": "Apache-2.0"
+}

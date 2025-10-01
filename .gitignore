@@ -18,3 +18,4 @@ settings.json
 
 # Node.js
 package-lock.json
+node_modules/
