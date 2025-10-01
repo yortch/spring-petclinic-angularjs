@@ -15,13 +15,11 @@
  */
 package org.springframework.samples.petclinic.repository;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.samples.petclinic.model.Owner;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
@@ -35,7 +33,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Tests data persistence and retrieval functionality for owner management
  * as specified in the PRD requirements.
  */
-@RunWith(SpringRunner.class)
 @DataJpaTest
 @Transactional
 public class OwnerRepositoryTest {

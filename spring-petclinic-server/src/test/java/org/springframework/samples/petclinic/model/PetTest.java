@@ -15,7 +15,7 @@
  */
 package org.springframework.samples.petclinic.model;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -149,7 +149,7 @@ public class PetTest {
 
         // Assert
         assertThat(pet.getVisits()).hasSize(1);
-        assertThat(pet.getVisits().get(0)).isEqualTo(visit);
+        assertThat(pet.getVisits().getFirst()).isEqualTo(visit);
         assertThat(visit.getPet()).isEqualTo(pet);
     }
 
@@ -202,7 +202,7 @@ public class PetTest {
         // Assert
         List<Visit> visits = pet.getVisits();
         assertThat(visits).hasSize(2);
-        assertThat(visits.get(0).getDescription()).isEqualTo("Later visit"); // Should be sorted by date descending (most recent first)
+        assertThat(visits.getFirst().getDescription()).isEqualTo("Later visit"); // Should be sorted by date descending (most recent first)
         assertThat(visits.get(1).getDescription()).isEqualTo("Earlier visit");
     }
 
@@ -301,7 +301,7 @@ public class PetTest {
         assertThat(pet.getType()).isEqualTo(type);
         assertThat(pet.getOwner()).isEqualTo(owner);
         assertThat(pet.getVisits()).hasSize(1);
-        assertThat(pet.getVisits().get(0)).isEqualTo(visit);
+        assertThat(pet.getVisits().getFirst()).isEqualTo(visit);
         assertThat(visit.getPet()).isEqualTo(pet);
     }
 

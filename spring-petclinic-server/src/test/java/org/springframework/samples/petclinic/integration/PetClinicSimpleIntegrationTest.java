@@ -16,8 +16,7 @@
 
 package org.springframework.samples.petclinic.integration;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -26,9 +25,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.samples.petclinic.PetClinicApplication;
 import org.springframework.samples.petclinic.service.ClinicService;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Simple integration tests for PetClinic application.
@@ -38,7 +36,6 @@ import static org.junit.Assert.*;
  * 
  * @author GitHub Copilot Assistant
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = PetClinicApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PetClinicSimpleIntegrationTest {
 
@@ -57,7 +54,7 @@ public class PetClinicSimpleIntegrationTest {
      */
     @Test
     public void testApplicationContextLoads() {
-        assertNotNull("Application context should load", applicationContext);
+        assertNotNull(applicationContext, "Application context should load");
     }
 
     /**
@@ -65,8 +62,8 @@ public class PetClinicSimpleIntegrationTest {
      */
     @Test
     public void testServiceInjection() {
-        assertNotNull("ClinicService should be autowired", clinicService);
-        assertNotNull("TestRestTemplate should be available", restTemplate);
+        assertNotNull(clinicService, "ClinicService should be autowired");
+        assertNotNull(restTemplate, "TestRestTemplate should be available");
     }
 
     /**
@@ -78,12 +75,12 @@ public class PetClinicSimpleIntegrationTest {
         ResponseEntity<String> response = restTemplate.getForEntity("/", String.class);
         
         // The application should respond (even if it redirects or returns content)
-        assertNotNull("Response should not be null", response);
+        assertNotNull(response, "Response should not be null");
         HttpStatus status = response.getStatusCode();
         
         // Accept various success codes (200, 302 redirect, etc.)
-        assertTrue("Application should respond with success status", 
-                   status.is2xxSuccessful() || status.is3xxRedirection());
+        assertTrue(status.is2xxSuccessful() || status.is3xxRedirection(), 
+                   "Application should respond with success status");
     }
 
     /**
@@ -92,13 +89,13 @@ public class PetClinicSimpleIntegrationTest {
      */
     @Test
     public void testClinicServiceBasicFunctionality() {
-        assertNotNull("ClinicService should be properly initialized", clinicService);
+        assertNotNull(clinicService, "ClinicService should be properly initialized");
         
         // Test that service methods are accessible (even if they return empty results)
         try {
             // These calls should not throw exceptions, even with empty database
-            assertNotNull("findAll should return a collection (possibly empty)", clinicService.findAll());
-            assertNotNull("findVets should return a collection (possibly empty)", clinicService.findVets());
+            assertNotNull(clinicService.findAll(), "findAll should return a collection (possibly empty)");
+            assertNotNull(clinicService.findVets(), "findVets should return a collection (possibly empty)");
         } catch (Exception e) {
             fail("ClinicService basic operations should not throw exceptions: " + e.getMessage());
         }
@@ -110,12 +107,12 @@ public class PetClinicSimpleIntegrationTest {
     @Test
     public void testManagementEndpoints() {
         ResponseEntity<String> healthResponse = restTemplate.getForEntity("/manage/health", String.class);
-        assertNotNull("Health endpoint should respond", healthResponse);
+        assertNotNull(healthResponse, "Health endpoint should respond");
         
         // Health endpoint should return 200 or 503 (service unavailable is also acceptable)
         HttpStatus healthStatus = healthResponse.getStatusCode();
-        assertTrue("Health endpoint should return valid status", 
-                   healthStatus == HttpStatus.OK || healthStatus == HttpStatus.SERVICE_UNAVAILABLE);
+        assertTrue(healthStatus == HttpStatus.OK || healthStatus == HttpStatus.SERVICE_UNAVAILABLE, 
+                   "Health endpoint should return valid status");
     }
 
     /**
@@ -124,11 +121,11 @@ public class PetClinicSimpleIntegrationTest {
     @Test
     public void testRequiredBeansPresent() {
         // Verify core service beans
-        assertTrue("ClinicService bean should be present", 
-                   applicationContext.containsBean("clinicServiceImpl"));
+        assertTrue(applicationContext.containsBean("clinicServiceImpl"), 
+                   "ClinicService bean should be present");
         
         // Verify that we can get beans by type
-        assertNotNull("ClinicService should be available by type", 
-                      applicationContext.getBean(ClinicService.class));
+        assertNotNull(applicationContext.getBean(ClinicService.class), 
+                      "ClinicService should be available by type");
     }
 }

@@ -6,11 +6,11 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Set;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.samples.petclinic.web.PetValidator;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -29,7 +29,7 @@ public class ValidatorTests {
     private Validator beanValidator;
     private PetValidator petValidator;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         LocaleContextHolder.setLocale(Locale.ENGLISH);
         beanValidator = createValidator();

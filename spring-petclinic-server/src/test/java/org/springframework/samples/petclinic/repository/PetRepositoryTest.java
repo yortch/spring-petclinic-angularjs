@@ -15,15 +15,13 @@
  */
 package org.springframework.samples.petclinic.repository;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.PetType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -37,7 +35,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Tests data persistence and retrieval functionality for pet registration and management
  * as specified in the PRD requirements.
  */
-@RunWith(SpringRunner.class)
 @DataJpaTest
 @Transactional
 public class PetRepositoryTest {
@@ -63,7 +60,7 @@ public class PetRepositoryTest {
 
         // Assert - 6 sample + 2 test = 8 total, should be alphabetically ordered
         assertThat(result.size()).isEqualTo(8);
-        assertThat(result.get(0).getName()).isEqualTo("bird");
+        assertThat(result.getFirst().getName()).isEqualTo("bird");
         assertThat(result.get(1).getName()).isEqualTo("cat");
         assertThat(result.get(2).getName()).isEqualTo("dog");
         assertThat(result.get(3).getName()).isEqualTo("guinea pig");

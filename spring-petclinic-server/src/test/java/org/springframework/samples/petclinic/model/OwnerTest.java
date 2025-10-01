@@ -15,14 +15,15 @@
  */
 package org.springframework.samples.petclinic.model;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -137,7 +138,7 @@ public class OwnerTest {
 
         // Assert
         assertThat(owner.getPets()).hasSize(1);
-        assertThat(owner.getPets().get(0)).isEqualTo(pet);
+        assertThat(owner.getPets().getFirst()).isEqualTo(pet);
         assertThat(pet.getOwner()).isEqualTo(owner);
     }
 
@@ -178,7 +179,7 @@ public class OwnerTest {
         // Assert
         List<Pet> pets = owner.getPets();
         assertThat(pets).hasSize(3);
-        assertThat(pets.get(0).getName()).isEqualTo("Alpha");
+        assertThat(pets.getFirst().getName()).isEqualTo("Alpha");
         assertThat(pets.get(1).getName()).isEqualTo("Max");
         assertThat(pets.get(2).getName()).isEqualTo("Zebra");
     }
@@ -452,10 +453,9 @@ public class OwnerTest {
      * Parameterized test for telephone validation as per PRD requirement:
      * "Validate telephone numbers to ensure proper format (10 digits maximum)"
      */
-    @RunWith(Parameterized.class)
-    public static class TelephoneValidationTest {
+    @Nested
+    public class TelephoneValidationTest {
 
-        @Parameterized.Parameters(name = "telephone={0}, shouldBeValid={1}")
         public static Collection<Object[]> data() {
             return Arrays.asList(new Object[][]{
                     {"1234567890", true},   // Valid: exactly 10 digits
@@ -467,15 +467,13 @@ public class OwnerTest {
                     {null, false}           // Invalid: null
             });
         }
-
-        @Parameterized.Parameter(0)
         public String telephone;
-
-        @Parameterized.Parameter(1)
         public boolean shouldBeValid;
 
-        @Test
-        public void telephoneValidation_should_validateCorrectly() {
+        @MethodSource("data")
+        @ParameterizedTest(name = "telephone={0}, shouldBeValid={1}")
+        public void telephoneValidation_should_validateCorrectly(String telephone, boolean shouldBeValid) {
+            initTelephoneValidationTest(telephone, shouldBeValid);
             // Arrange
             Owner owner = createValidOwner();
             owner.setTelephone(telephone);
@@ -490,6 +488,11 @@ public class OwnerTest {
                 assertThat(violations).isNotEmpty();
                 assertThat(violations.iterator().next().getPropertyPath().toString()).isEqualTo("telephone");
             }
+        }
+
+        public void initTelephoneValidationTest(String telephone, boolean shouldBeValid) {
+            this.telephone = telephone;
+            this.shouldBeValid = shouldBeValid;
         }
     }
 

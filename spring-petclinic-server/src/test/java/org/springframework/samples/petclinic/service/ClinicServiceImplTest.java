@@ -15,11 +15,11 @@
  */
 package org.springframework.samples.petclinic.service;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.*;
 import org.springframework.samples.petclinic.repository.OwnerRepository;
@@ -40,7 +40,7 @@ import static org.mockito.Mockito.*;
  * Tests business operations including owner management, pet registration, visit recording,
  * and veterinarian directory functionality as specified in the PRD requirements.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class ClinicServiceImplTest {
 
     @Mock
@@ -57,7 +57,7 @@ public class ClinicServiceImplTest {
 
     private ClinicServiceImpl clinicService;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         clinicService = new ClinicServiceImpl(petRepository, vetRepository, ownerRepository, visitRepository);
     }

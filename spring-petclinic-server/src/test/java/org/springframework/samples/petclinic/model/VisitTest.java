@@ -15,12 +15,12 @@
  */
 package org.springframework.samples.petclinic.model;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
 import java.util.Date;
 import java.util.Set;
 
@@ -184,7 +184,9 @@ public class VisitTest {
     public void validation_should_pass_when_descriptionIsWithinSizeLimit() {
         // Arrange
         Visit visit = new Visit();
-        String validDescription = "A".repeat(1000); // Well within 8192 limit
+        char[] chars = new char[1000];
+        java.util.Arrays.fill(chars, 'A');
+        String validDescription = new String(chars); // Well within 8192 limit
         visit.setDescription(validDescription);
 
         // Act
@@ -198,7 +200,9 @@ public class VisitTest {
     public void validation_should_fail_when_descriptionExceedsSizeLimit() {
         // Arrange
         Visit visit = new Visit();
-        String invalidDescription = "A".repeat(8193); // Exceeds 8192 limit
+        char[] chars = new char[8193];
+        java.util.Arrays.fill(chars, 'A');
+        String invalidDescription = new String(chars); // Exceeds 8192 limit
         visit.setDescription(invalidDescription);
 
         // Act
@@ -239,7 +243,9 @@ public class VisitTest {
     public void validation_should_pass_when_descriptionIsAtMaximumLength() {
         // Arrange
         Visit visit = new Visit();
-        String maxLengthDescription = "A".repeat(8192); // Exactly at limit
+        char[] chars = new char[8192];
+        java.util.Arrays.fill(chars, 'A');
+        String maxLengthDescription = new String(chars); // Exactly at limit
         visit.setDescription(maxLengthDescription);
 
         // Act

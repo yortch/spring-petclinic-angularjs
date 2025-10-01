@@ -15,9 +15,10 @@
  */
 package org.springframework.samples.petclinic.model;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -140,10 +141,9 @@ public class PetTypeTest {
      * Parameterized test for common pet types as mentioned in PRD:
      * "Support multiple pet types (minimum: dog, cat, bird, hamster, snake, lizard)"
      */
-    @RunWith(Parameterized.class)
-    public static class CommonPetTypesTest {
+    @Nested
+    public class CommonPetTypesTest {
 
-        @Parameterized.Parameters(name = "petTypeName={0}")
         public static Collection<Object[]> data() {
             return Arrays.asList(new Object[][]{
                     {"dog"},
@@ -160,12 +160,12 @@ public class PetTypeTest {
                     {"Lizard"}
             });
         }
-
-        @Parameterized.Parameter
         public String petTypeName;
 
-        @Test
-        public void petType_should_supportCommonPetTypes_when_validTypeProvided() {
+        @MethodSource("data")
+        @ParameterizedTest(name = "petTypeName={0}")
+        public void petType_should_supportCommonPetTypes_when_validTypeProvided(String petTypeName) {
+            initCommonPetTypesTest(petTypeName);
             // Arrange
             PetType petType = new PetType();
 
@@ -175,6 +175,10 @@ public class PetTypeTest {
             // Assert
             assertThat(petType.getName()).isEqualTo(petTypeName);
             assertThat(petType.toString()).isEqualTo(petTypeName);
+        }
+
+        public void initCommonPetTypesTest(String petTypeName) {
+            this.petTypeName = petTypeName;
         }
     }
 

@@ -17,7 +17,6 @@ package org.springframework.samples.petclinic.web;
 
 import java.util.Collection;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.samples.petclinic.model.Owner;
@@ -26,13 +25,13 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 /**
  * @author Juergen Hoeller
@@ -46,7 +45,6 @@ public class OwnerResource extends AbstractResourceController {
     private final ClinicService clinicService;
 
 
-    @Autowired
     public OwnerResource(ClinicService clinicService) {
         this.clinicService = clinicService;
     }
@@ -63,7 +61,7 @@ public class OwnerResource extends AbstractResourceController {
     /**
      * Create Owner
      */
-    @RequestMapping(value = "/owners", method = RequestMethod.POST)
+    @PostMapping("/owners")
     @ResponseStatus(HttpStatus.CREATED)
     public void createOwner(@Valid @RequestBody Owner owner) {
     	this.clinicService.saveOwner(owner);
@@ -72,8 +70,8 @@ public class OwnerResource extends AbstractResourceController {
     /**
      * Read single Owner
      */
-    @RequestMapping(value = "/owners/{ownerId}", method = RequestMethod.GET)
-    public Owner findOwner(@PathVariable("ownerId") int ownerId) {
+    @GetMapping("/owners/{ownerId}")
+    public Owner findOwner(@PathVariable int ownerId) {
         return retrieveOwner(ownerId);
     }
     
@@ -88,8 +86,8 @@ public class OwnerResource extends AbstractResourceController {
     /**
      * Update Owner
      */
-    @RequestMapping(value = "/owners/{ownerId}", method = RequestMethod.PUT)
-    public Owner updateOwner(@PathVariable("ownerId") int ownerId, @Valid @RequestBody Owner ownerRequest) {
+    @PutMapping("/owners/{ownerId}")
+    public Owner updateOwner(@PathVariable int ownerId, @Valid @RequestBody Owner ownerRequest) {
     	Owner ownerModel = retrieveOwner(ownerId);
     	if (ownerModel == null) {
     		throw new ObjectRetrievalFailureException(Owner.class, ownerId);

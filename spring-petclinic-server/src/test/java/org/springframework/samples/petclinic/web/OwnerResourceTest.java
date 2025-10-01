@@ -39,9 +39,8 @@
  */
 package org.springframework.samples.petclinic.web;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -49,7 +48,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.service.ClinicService;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
@@ -68,7 +66,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  *
  * @author Spring PetClinic Team
  */
-@RunWith(SpringRunner.class)
 @WebMvcTest(OwnerResource.class)
 public class OwnerResourceTest {
 
@@ -80,7 +77,7 @@ public class OwnerResourceTest {
 
     private Owner validOwner;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         validOwner = createValidOwner(1, "John", "Doe");
     }

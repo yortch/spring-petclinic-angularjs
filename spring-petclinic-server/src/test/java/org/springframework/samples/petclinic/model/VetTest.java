@@ -15,12 +15,12 @@
  */
 package org.springframework.samples.petclinic.model;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
 import java.util.List;
 import java.util.Set;
 
@@ -66,7 +66,7 @@ public class VetTest {
 
         // Assert
         assertThat(vet.getSpecialties()).hasSize(1);
-        assertThat(vet.getSpecialties().get(0)).isEqualTo(specialty);
+        assertThat(vet.getSpecialties().getFirst()).isEqualTo(specialty);
         assertThat(vet.getNrOfSpecialties()).isEqualTo(1);
     }
 
@@ -113,7 +113,7 @@ public class VetTest {
         // Assert
         List<Specialty> specialties = vet.getSpecialties();
         assertThat(specialties).hasSize(3);
-        assertThat(specialties.get(0).getName()).isEqualTo("Anesthesia");
+        assertThat(specialties.getFirst().getName()).isEqualTo("Anesthesia");
         assertThat(specialties.get(1).getName()).isEqualTo("Internal Medicine");
         assertThat(specialties.get(2).getName()).isEqualTo("Zoo Medicine");
     }
