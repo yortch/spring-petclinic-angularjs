@@ -240,11 +240,17 @@ public class OwnerResourceTest {
         when(clinicService.findOwnerById(999)).thenReturn(null);
         String updateJson = "{\"firstName\":\"Johnny\",\"lastName\":\"Smith\",\"address\":\"456 Oak Ave\",\"city\":\"New City\",\"telephone\":\"9876543210\"}";
 
-        // Act & Assert - Controller will throw ObjectRetrievalFailureException
-        mockMvc.perform(put("/owners/999")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(updateJson))
-                .andExpect(result -> assertThat(result.getResolvedException()).isInstanceOf(jakarta.servlet.ServletException.class));
+        // Act & Assert - Controller will throw ObjectRetrievalFailureException wrapped in ServletException
+        try {
+            mockMvc.perform(put("/owners/999")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(updateJson));
+            // If we get here, the test should fail because an exception should have been thrown
+            throw new AssertionError("Expected ServletException to be thrown");
+        } catch (jakarta.servlet.ServletException ex) {
+            // Expected exception - verify it's the right type and contains the cause
+            assertThat(ex.getCause()).isInstanceOf(org.springframework.orm.ObjectRetrievalFailureException.class);
+        }
 
         verify(clinicService).findOwnerById(999);
         verify(clinicService, never()).saveOwner(any(Owner.class));
