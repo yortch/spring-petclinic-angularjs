@@ -29,7 +29,7 @@ Explain this application and show me how to run and compile and run Pet clinic a
 
 ### Phase 1a: Create new PRD
 
-Prompt file was downloaded from [https://github.com/github/awesome-copilot/blob/main/prompts/breakdown-feature-prd.prompt.md] and added here: [.github/prompts/generate-prd.prompt.md]()
+Prompt file was downloaded from [](https://github.com/github/awesome-copilot/blob/main/prompts/breakdown-feature-prd.prompt.md) and added here: [](.github/prompts/generate-prd.prompt.md)
 
 #### PRD Prompt
 
@@ -45,7 +45,7 @@ Use JaCoCo to help me measure the existing test coverage for the Java spring-pet
 
 ### Phase 2b: Generate Junit test
 
-Prompt file was downloaded from: [https://github.com/github/awesome-copilot/blob/main/prompts/java-junit.prompt.md?plain=1](). Due to compatibility reasons, replaced 5 with 4 and saved it here: [.github/prompts/junit-4-generate-tests]
+Prompt file was downloaded from: [](https://github.com/github/awesome-copilot/blob/main/prompts/java-junit.prompt.md?plain=1). Due to compatibility reasons, replaced 5 with 4 and saved it here: [](.github/prompts/junit-4-generate-tests.prompt.md)
 
 #### JUnit Prompt
 
