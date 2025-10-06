@@ -53,7 +53,8 @@ class AbstractResourceControllerTest {
         assertEquals(0, crossOrigin.origins().length);
         assertEquals(0, crossOrigin.allowedHeaders().length);
         assertEquals(0, crossOrigin.exposedHeaders().length);
-        assertFalse(crossOrigin.allowCredentials().isEmpty());
+        // allowCredentials() returns a String, empty string is the default
+        assertEquals("", crossOrigin.allowCredentials());
         assertEquals(-1, crossOrigin.maxAge());
     }
 }

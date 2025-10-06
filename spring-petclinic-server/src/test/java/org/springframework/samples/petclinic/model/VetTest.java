@@ -47,7 +47,9 @@ class VetTest {
     void testSetSpecialtiesInternalWithNull() {
         vet.setSpecialtiesInternal(null);
         
-        assertNull(vet.getSpecialtiesInternal());
+        // getSpecialtiesInternal() initializes the set if null
+        assertNotNull(vet.getSpecialtiesInternal());
+        assertEquals(0, vet.getSpecialtiesInternal().size());
     }
 
     @Test

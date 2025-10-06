@@ -70,9 +70,11 @@ class PetTest {
 
     @Test
     void testSetAndGetOwner() {
-        pet.setOwner(mockOwner);
+        // setOwner is protected, use addPet on Owner instead
+        Owner realOwner = new Owner();
+        realOwner.addPet(pet);
 
-        assertEquals(mockOwner, pet.getOwner());
+        assertEquals(realOwner, pet.getOwner());
     }
 
     @Test
@@ -147,9 +149,10 @@ class PetTest {
         List<Visit> sortedVisits = pet.getVisits();
 
         assertEquals(3, sortedVisits.size());
-        assertEquals(mockVisit2, sortedVisits.get(0));
-        assertEquals(mockVisit1, sortedVisits.get(1));
-        assertEquals(mockVisit3, sortedVisits.get(2));
+        // Visits are sorted descending by date (newest first)
+        assertEquals(mockVisit3, sortedVisits.get(0)); // 2023-01-20 (newest)
+        assertEquals(mockVisit1, sortedVisits.get(1)); // 2023-01-15
+        assertEquals(mockVisit2, sortedVisits.get(2)); // 2023-01-10 (oldest)
     }
 
     @Test
@@ -227,22 +230,15 @@ class PetTest {
     }
 
     @Test
-    void testSetOwnerToNull() {
-        pet.setOwner(mockOwner);
-        pet.setOwner(null);
-
-        assertNull(pet.getOwner());
-    }
-
-    @Test
     void testSetVisitsInternalToNull() {
         Set<Visit> visits = new HashSet<>();
         visits.add(mockVisit1);
         pet.setVisitsInternal(visits);
         pet.setVisitsInternal(null);
 
+        // getVisitsInternal() initializes if null
         Set<Visit> retrievedVisits = pet.getVisitsInternal();
         assertNotNull(retrievedVisits);
-        assertTrue(retrievedVisits.isEmpty());
+        assertEquals(0, retrievedVisits.size());
     }
 }

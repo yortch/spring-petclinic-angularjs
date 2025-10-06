@@ -13,6 +13,7 @@ import org.springframework.validation.Errors;
 import java.util.Date;
 
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.lenient;
 
 @ExtendWith(MockitoExtension.class)
 class PetValidatorTest {
@@ -129,7 +130,7 @@ class PetValidatorTest {
     void testValidate_ExistingPetWithNullType_DoesNotRejectType() {
         when(pet.getName()).thenReturn("Fluffy");
         when(pet.isNew()).thenReturn(false);
-        when(pet.getType()).thenReturn(null);
+        lenient().when(pet.getType()).thenReturn(null);
         when(pet.getBirthDate()).thenReturn(new Date());
 
         petValidator.validate(pet, errors);
