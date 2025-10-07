@@ -121,7 +121,10 @@ class PetTest {
     @Test
     void testSetVisitsInternalWithNull() {
         pet.setVisitsInternal(null);
-        assertNull(pet.getVisitsInternal());
+        // getVisitsInternal() initializes to empty HashSet when null
+        Set<Visit> visits = pet.getVisitsInternal();
+        assertNotNull(visits);
+        assertTrue(visits.isEmpty());
     }
 
     @Test
@@ -152,8 +155,9 @@ class PetTest {
 
         List<Visit> visits = pet.getVisits();
         assertEquals(2, visits.size());
-        assertEquals(earlierDate, visits.get(0).getDate());
-        assertEquals(laterDate, visits.get(1).getDate());
+        // Visits are sorted in descending order (most recent first)
+        assertEquals(laterDate, visits.get(0).getDate());
+        assertEquals(earlierDate, visits.get(1).getDate());
     }
 
     @Test

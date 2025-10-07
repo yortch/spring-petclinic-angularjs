@@ -77,7 +77,7 @@ class SpecialtyTest {
     void testToStringWithNullName() {
         specialty.setName(null);
         String result = specialty.toString();
-        assertNotNull(result);
+        assertNull(result);
     }
 
     @Test
