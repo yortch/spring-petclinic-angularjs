@@ -1,0 +1,77 @@
+/* You can add global styles to this file, and also import other style files */
+
+// Spring PetClinic theme colors
+$spring-green: #6db33f;
+$spring-dark-green: #5fa134;
+$spring-brown: #34302D;
+$spring-grey: #838789;
+$spring-light-grey: #f1f1f1;
+
+// Global styles
+body {
+  background-color: $spring-light-grey;
+  color: $spring-brown;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+// Navigation styles
+.navbar-brand {
+  color: $spring-light-grey !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: $spring-light-grey;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: $spring-light-grey;
+  background-color: $spring-green;
+}
+
+.bg-dark {
+  background-color: $spring-brown !important;
+}
+
+// Button styles
+.btn-primary {
+  background-color: $spring-brown;
+  border-color: $spring-green;
+  border-width: 2px;
+  
+  &:hover {
+    background-color: $spring-brown;
+    border-color: $spring-brown;
+  }
+}
+
+.btn-success {
+  background-color: $spring-green;
+  border-color: $spring-dark-green;
+}
+
+// Table styles
+.table > thead > tr > th {
+  background-color: mix($spring-brown, white, 97%);
+  color: $spring-light-grey;
+}
+
+// Links
+a {
+  color: $spring-dark-green;
+  
+  &:hover {
+    color: $spring-dark-green;
+  }
+}
+
+// Container
+.container {
+  margin-top: 40px;
+  margin-bottom: 100px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+h1 {
+  margin-bottom: 15px;
+}

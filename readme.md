@@ -1,5 +1,8 @@
 # AngularJS and Spring Boot version of the Spring PetClinic Sample Application [![Build Status](https://travis-ci.org/spring-petclinic/spring-petclinic-angularjs.svg?branch=master)](https://travis-ci.org/spring-petclinic/spring-petclinic-angularjs/)
 
+## Product Requirements and Business Documentation
+📋 **[Product Requirements Document (PRD)](PRD.md)** - Comprehensive business requirements, user stories, and technical specifications for the Spring PetClinic application.
+
 ## Understanding the Spring Petclinic application with a few diagrams
 [See the presentation here](http://fr.slideshare.net/AntoineRey/spring-framework-petclinic-sample-application)
 
