@@ -29,7 +29,7 @@ Explain this application and show me how to run and compile and run Pet clinic a
 
 ### Phase 1a: Create new PRD
 
-Prompt file was downloaded from [https://github.com/github/awesome-copilot/blob/main/prompts/breakdown-feature-prd.prompt.md](https://github.com/github/awesome-copilot/blob/main/prompts/breakdown-feature-prd.prompt.md) and added here: [.github/prompts/generate-prd.prompt.md](.github/prompts/generate-prd.prompt.md)
+Prompt file was downloaded from [https://github.com/github/awesome-copilot/blob/main/prompts/breakdown-feature-prd.prompt.md](https://github.com/github/awesome-copilot/blob/main/prompts/breakdown-feature-prd.prompt.md). It was simplified and added here: [.github/prompts/generate-prd.prompt.md](.github/prompts/generate-prd.prompt.md)
 
 #### PRD Prompt
 
