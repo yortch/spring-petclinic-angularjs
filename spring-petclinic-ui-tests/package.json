@@ -1,0 +1,27 @@
+{
+  "name": "spring-petclinic-ui-tests",
+  "version": "1.0.0",
+  "description": "Playwright UI tests for Spring PetClinic",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report",
+    "start:server": "./scripts/start-server.sh"
+  },
+  "keywords": [
+    "playwright",
+    "e2e",
+    "testing",
+    "petclinic"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^24.7.2",
+    "typescript": "^5.9.3"
+  }
+}
