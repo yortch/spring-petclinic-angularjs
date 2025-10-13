@@ -37,6 +37,10 @@ Prompt file was downloaded from [https://github.com/github/awesome-copilot/blob/
 
 ## Phase 2: Generate Java unit tests
 
+If you have [GitHub Copilot Application Modernization (for Java)](https://learn.microsoft.com/en-us/azure/developer/java/migration/migrate-github-copilot-app-modernization-for-java-quickstart-assess-migrate) you can simply use this prompt, otherwise follow Phase 2a and Phase 2b prompt:
+
+#generate_tests_for_java jdk8 is installed here: jdk 8 location: C:\Users\jbalderas\apps\jdk8u442-b06
+
 ### Phase 2a: Measure existing test coverage
 
 #### Test Coverage Prompt
@@ -70,6 +74,8 @@ In preparation to upgrading Java and Spring Boot versions, I need to create UI t
 ### Phase 4: Java and Spring Boot upgrade
 
 #### Java Upgrade Prompt
+
+This prompt uses a tool from [GitHub Copilot Application Modernization (for Java)](https://learn.microsoft.com/en-us/azure/developer/java/migration/migrate-github-copilot-app-modernization-for-java-quickstart-assess-migrate):
 
 #generate_upgrade_plan_for_java_project for spring-petclinic-server project into Java 21 and latest stable SpringBoot 3.5.x available using jdk 8 location: C:\Users\jbalderas\apps\jdk8u442-b06 and jdk21 location: C:\Program Files\Eclipse Adoptium\jdk-21.0.2.13-hotspot.
 After upgrade is complete perform the following tasks:
