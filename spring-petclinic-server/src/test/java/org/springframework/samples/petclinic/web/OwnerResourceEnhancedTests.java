@@ -16,9 +16,9 @@
 package org.springframework.samples.petclinic.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -27,7 +27,7 @@ import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.PetType;
 import org.springframework.samples.petclinic.service.ClinicService;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
@@ -45,7 +45,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  *
  * @author Test Generator
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @WebMvcTest(OwnerResource.class)
 public class OwnerResourceEnhancedTests {
 
@@ -61,7 +61,7 @@ public class OwnerResourceEnhancedTests {
     private Owner owner1;
     private Owner owner2;
 
-    @Before
+    @BeforeEach
     public void setup() {
         owner1 = new Owner();
         owner1.setId(1);
@@ -86,7 +86,7 @@ public class OwnerResourceEnhancedTests {
 
         mvc.perform(get("/owners/1").accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
-            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(content().contentType("application/json"))
             .andExpect(jsonPath("$.id").value(1))
             .andExpect(jsonPath("$.firstName").value("George"))
             .andExpect(jsonPath("$.lastName").value("Franklin"))
@@ -102,7 +102,7 @@ public class OwnerResourceEnhancedTests {
 
         mvc.perform(get("/owners/list").accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
-            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(content().contentType("application/json"))
             .andExpect(jsonPath("$[0].id").value(1))
             .andExpect(jsonPath("$[0].firstName").value("George"))
             .andExpect(jsonPath("$[1].id").value(2))

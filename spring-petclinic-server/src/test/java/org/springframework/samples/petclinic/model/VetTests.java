@@ -15,8 +15,8 @@
  */
 package org.springframework.samples.petclinic.model;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
@@ -31,7 +31,7 @@ public class VetTests {
 
     private Vet vet;
 
-    @Before
+    @BeforeEach
     public void setup() {
         vet = new Vet();
         vet.setFirstName("James");

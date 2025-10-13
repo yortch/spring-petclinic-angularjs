@@ -15,11 +15,11 @@
  */
 package org.springframework.samples.petclinic.service;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.samples.petclinic.model.*;
 import org.springframework.samples.petclinic.repository.OwnerRepository;
 import org.springframework.samples.petclinic.repository.PetRepository;
@@ -41,7 +41,7 @@ import static org.mockito.Mockito.times;
  *
  * @author Test Generator
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class ClinicServiceImplTests {
 
     @Mock
@@ -64,7 +64,7 @@ public class ClinicServiceImplTests {
     private Vet testVet;
     private PetType testPetType;
 
-    @Before
+    @BeforeEach
     public void setup() {
         clinicService = new ClinicServiceImpl(petRepository, vetRepository, ownerRepository, visitRepository);
 
