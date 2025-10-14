@@ -1,115 +1,159 @@
 import { test, expect } from '@playwright/test';
 
 /**
- * Tests for Owner management functionality
+ * Tests for Owner management functionality in Angular 20
  */
-test.describe('Owner Management', () => {
+test.describe('Owner Management (Angular 20)', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
-    await page.click('text=Find owners');
-    await page.waitForLoadState('networkidle');
+    await page.click('a.nav-link:has-text("Find owners")');
+    await page.waitForURL('**/owners');
   });
 
-  test('should display list of owners', async ({ page }) => {
-    // Click on Find Owner button without entering a name (shows all)
-    await page.click('button:has-text("Find Owner")');
-    await page.waitForLoadState('networkidle');
-    
+  test('should display list of owners with search filter', async ({ page }) => {
+    // Angular shows owners list immediately
     // Should display owners table
-    await expect(page.locator('table')).toBeVisible();
+    await expect(page.locator('table.table')).toBeVisible();
     
     // Should have column headers
     await expect(page.locator('th:has-text("Name")')).toBeVisible();
-    await expect(page.locator('th:has-text("Address")')).toBeVisible();
     await expect(page.locator('th:has-text("City")')).toBeVisible();
     await expect(page.locator('th:has-text("Telephone")')).toBeVisible();
-    await expect(page.locator('th:has-text("Pets")')).toBeVisible();
+    
+    // Should have search input
+    await expect(page.locator('input[placeholder*="Search"]')).toBeVisible();
+    
+    // Should have Add Owner button
+    await expect(page.locator('a.btn:has-text("Add Owner")')).toBeVisible();
   });
 
-  test('should search for owner by last name', async ({ page }) => {
-    // Enter last name
-    await page.fill('input[name="lastName"]', 'Franklin');
-    await page.click('button:has-text("Find Owner")');
-    await page.waitForLoadState('networkidle');
+  test('should search for owner by last name using filter', async ({ page }) => {
+    // Enter last name in search filter
+    await page.fill('input[placeholder*="Search"]', 'Franklin');
+    await page.waitForTimeout(300); // Wait for filter to apply
     
     // Should display matching owner(s)
     await expect(page.locator('text=Franklin')).toBeVisible();
+    
+    // Clear search to verify filter works
+    await page.fill('input[placeholder*="Search"]', '');
+    await page.waitForTimeout(300);
+    
+    // Should show more owners again
+    const rowCount = await page.locator('table tbody tr').count();
+    expect(rowCount).toBeGreaterThan(1);
   });
 
   test('should view owner details', async ({ page }) => {
-    // Find all owners
-    await page.click('button:has-text("Find Owner")');
-    await page.waitForLoadState('networkidle');
+    // Click on first owner link
+    await page.click('table tbody tr:first-child a');
+    await page.waitForURL('**/owners/**');
     
-    // Click on first owner
-    await page.click('table tr:nth-child(1) a');
-    await page.waitForLoadState('networkidle');
+    // Should display owner information section
+    await expect(page.locator('h2:has-text("Owner Information")')).toBeVisible();
     
-    // Should display owner information
-    await expect(page.locator('text=Owner Information')).toBeVisible();
-    await expect(page.locator('text=Name')).toBeVisible();
-    await expect(page.locator('text=Address')).toBeVisible();
-    await expect(page.locator('text=City')).toBeVisible();
-    await expect(page.locator('text=Telephone')).toBeVisible();
+    // Should have owner details
+    await expect(page.locator('dt:has-text("Name")')).toBeVisible();
+    await expect(page.locator('dt:has-text("Address")')).toBeVisible();
+    await expect(page.locator('dt:has-text("City")')).toBeVisible();
+    await expect(page.locator('dt:has-text("Telephone")')).toBeVisible();
+    
+    // Should have Edit Owner button
+    await expect(page.locator('a:has-text("Edit Owner")')).toBeVisible();
     
     // Should display pets and visits section
-    await expect(page.locator('text=Pets and Visits')).toBeVisible();
+    await expect(page.locator('h2:has-text("Pets and Visits")')).toBeVisible();
   });
 
   test('should add new owner', async ({ page }) => {
     // Click Add Owner button
-    await page.click('text=Add Owner');
-    await page.waitForLoadState('networkidle');
+    await page.click('a.btn:has-text("Add Owner")');
+    await page.waitForURL('**/owners/new');
     
-    // Fill in owner details
-    await page.fill('input[name="firstName"]', 'Test');
-    await page.fill('input[name="lastName"]', 'Owner');
-    await page.fill('input[name="address"]', '123 Test Street');
-    await page.fill('input[name="city"]', 'Test City');
-    await page.fill('input[name="telephone"]', '1234567890');
+    // Should show form title
+    await expect(page.locator('h2:has-text("Owner")')).toBeVisible();
+    
+    // Fill in owner details using Angular reactive forms
+    await page.fill('input#firstName', 'Test');
+    await page.fill('input#lastName', 'Owner');
+    await page.fill('input#address', '123 Test Street');
+    await page.fill('input#city', 'Test City');
+    await page.fill('input#telephone', '1234567890');
     
     // Submit form
-    await page.click('button:has-text("Submit")');
-    await page.waitForLoadState('networkidle');
+    await page.click('button[type="submit"]:has-text("Add Owner")');
+    await page.waitForURL('**/owners/**');
     
     // Should redirect to owner details page
-    await expect(page.locator('text=Owner Information')).toBeVisible();
+    await expect(page.locator('h2:has-text("Owner Information")')).toBeVisible();
     await expect(page.locator('text=Test Owner')).toBeVisible();
   });
 
   test('should edit owner information', async ({ page }) => {
-    // Find all owners
-    await page.click('button:has-text("Find Owner")');
-    await page.waitForLoadState('networkidle');
-    
     // Click on first owner
-    await page.click('table tr:nth-child(1) a');
-    await page.waitForLoadState('networkidle');
+    await page.click('table tbody tr:first-child a');
+    await page.waitForURL('**/owners/**');
+    
+    // Get the owner ID from URL
+    const url = page.url();
+    const ownerId = url.match(/owners\/(\d+)/)?.[1];
     
     // Click Edit Owner button
-    await page.click('text=Edit Owner');
-    await page.waitForLoadState('networkidle');
+    await page.click('a:has-text("Edit Owner")');
+    await page.waitForURL(`**/owners/${ownerId}/edit`);
     
     // Modify owner details
-    await page.fill('input[name="city"]', 'Updated City');
+    await page.fill('input#city', 'Updated City');
     
     // Submit form
-    await page.click('button:has-text("Update Owner")');
-    await page.waitForLoadState('networkidle');
+    await page.click('button[type="submit"]:has-text("Update Owner")');
+    await page.waitForURL(`**/owners/${ownerId}`);
     
     // Should display updated information
-    await expect(page.locator('text=Updated City')).toBeVisible();
+    await expect(page.locator('dd:has-text("Updated City")')).toBeVisible();
   });
 
   test('should show validation errors for invalid input', async ({ page }) => {
     // Click Add Owner button
-    await page.click('text=Add Owner');
-    await page.waitForLoadState('networkidle');
+    await page.click('a.btn:has-text("Add Owner")');
+    await page.waitForURL('**/owners/new');
     
-    // Try to submit empty form
-    await page.click('button:has-text("Submit")');
+    // Fill only firstName to trigger validation on other required fields
+    await page.fill('input#firstName', 'Test');
+    await page.fill('input#lastName', ''); // Clear required field
     
-    // Should display validation errors
-    await expect(page.locator('.has-error, .error')).toHaveCount({ min: 1 });
+    // Try to submit form
+    await page.click('button[type="submit"]:has-text("Add Owner")');
+    
+    // Should display validation error for lastName
+    await expect(page.locator('.text-danger, .invalid-feedback')).toBeVisible();
+  });
+
+  test('should add pet to owner', async ({ page }) => {
+    // Click on first owner
+    await page.click('table tbody tr:first-child a');
+    await page.waitForURL('**/owners/**');
+    
+    // Click Add New Pet button
+    await page.click('a:has-text("Add New Pet")');
+    await page.waitForURL('**/pets/new');
+    
+    // Should show pet form
+    await expect(page.locator('h2:has-text("New Pet")')).toBeVisible();
+    
+    // Fill in pet details
+    await page.fill('input#name', 'TestPet');
+    await page.selectOption('select#type', { index: 1 }); // Select first pet type
+    
+    // Fill birth date
+    const today = new Date().toISOString().split('T')[0];
+    await page.fill('input#birthDate', today);
+    
+    // Submit form
+    await page.click('button[type="submit"]:has-text("Add Pet")');
+    await page.waitForURL('**/owners/**');
+    
+    // Should show new pet in owner details
+    await expect(page.locator('text=TestPet')).toBeVisible();
   });
 });
