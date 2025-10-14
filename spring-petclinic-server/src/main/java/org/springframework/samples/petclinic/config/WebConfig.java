@@ -9,6 +9,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("index");
+        // Forward root to Angular's index.html
+        registry.addViewController("/").setViewName("forward:/index.html");
     }
 }
