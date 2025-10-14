@@ -1,0 +1,32 @@
+h2 {
+  color: #34302D;
+  margin-bottom: 1.5rem;
+}
+
+.col-form-label {
+  color: #34302D;
+  font-weight: 500;
+}
+
+.form-control-static {
+  padding-top: 7px;
+  padding-bottom: 7px;
+  margin-bottom: 0;
+  color: #34302D;
+}
+
+.btn-success {
+  background-color: #6db33f;
+  border-color: #6db33f;
+  
+  &:hover {
+    background-color: #5fa134;
+    border-color: #5fa134;
+  }
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #6db33f;
+  box-shadow: 0 0 0 0.2rem rgba(109, 179, 63, 0.25);
+}

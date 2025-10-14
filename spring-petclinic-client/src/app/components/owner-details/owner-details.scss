@@ -1,0 +1,40 @@
+h2 {
+  color: #34302D;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.table {
+  th {
+    color: #34302D;
+    font-weight: 600;
+  }
+
+  a.text-success {
+    color: #6db33f !important;
+    text-decoration: none;
+
+    &:hover {
+      color: #5fa134 !important;
+      text-decoration: underline;
+    }
+  }
+}
+
+.btn-outline-success {
+  color: #6db33f;
+  border-color: #6db33f;
+  
+  &:hover {
+    background-color: #6db33f;
+    border-color: #6db33f;
+    color: white;
+  }
+}
+
+dl.row {
+  dt {
+    color: #34302D;
+    font-weight: 600;
+  }
+}

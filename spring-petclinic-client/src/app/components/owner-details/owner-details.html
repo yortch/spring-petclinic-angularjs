@@ -1,0 +1,80 @@
+<div class="container">
+  <h2>Owner Information</h2>
+
+  <table class="table table-striped" *ngIf="owner">
+    <tbody>
+      <tr>
+        <th class="col-sm-3">Name</th>
+        <td><b>{{owner.firstName}} {{owner.lastName}}</b></td>
+      </tr>
+      <tr>
+        <th>Address</th>
+        <td>{{owner.address}}</td>
+      </tr>
+      <tr>
+        <th>City</th>
+        <td>{{owner.city}}</td>
+      </tr>
+      <tr>
+        <th>Telephone</th>
+        <td>{{owner.telephone}}</td>
+      </tr>
+      <tr>
+        <td>
+          <a class="btn btn-outline-success" [routerLink]="['/owners', owner.id, 'edit']">Edit Owner</a>
+        </td>
+        <td>
+          <a [routerLink]="['/owners', owner.id, 'pets', 'new']" class="btn btn-outline-success">Add New Pet</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Pets and Visits</h2>
+
+  <table class="table table-striped" *ngIf="owner">
+    <tbody>
+      <tr *ngFor="let pet of owner.pets">
+        <td class="align-top">
+          <dl class="row">
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">
+              <a [routerLink]="['/owners', owner.id, 'pets', pet.id, 'edit']" class="text-success">{{pet.name}}</a>
+            </dd>
+            <dt class="col-sm-3">Birth Date</dt>
+            <dd class="col-sm-9">{{pet.birthDate | date:'yyyy-MM-dd'}}</dd>
+            <dt class="col-sm-3">Type</dt>
+            <dd class="col-sm-9">{{pet.type.name}}</dd>
+          </dl>
+        </td>
+        <td class="align-top">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>Visit Date</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let visit of pet.visits">
+                <td>{{visit.date | date:'yyyy-MM-dd'}}</td>
+                <td>{{visit.description}}</td>
+              </tr>
+              <tr>
+                <td>
+                  <a [routerLink]="['/owners', owner.id, 'pets', pet.id, 'edit']" class="text-success">Edit Pet</a>
+                </td>
+                <td>
+                  <a [routerLink]="['/owners', owner.id, 'pets', pet.id, 'visits', 'new']" class="text-success">Add Visit</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr *ngIf="!owner.pets || owner.pets.length === 0">
+        <td colspan="2" class="text-center text-muted">No pets registered</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,49 @@
+<div class="container">
+  <h2>New Visit for {{ petName }}</h2>
+
+  <form [formGroup]="visitForm" (ngSubmit)="onSubmit()" style="max-width: 30em;">
+    <div class="mb-3">
+      <label for="date" class="form-label">Date</label>
+      <input 
+        type="date" 
+        class="form-control" 
+        id="date" 
+        formControlName="date"
+        [class.is-invalid]="submitted && f['date'].errors"
+      />
+      <div class="invalid-feedback" *ngIf="submitted && f['date'].errors">
+        <div *ngIf="f['date'].errors['required']">Date is required.</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea 
+        class="form-control" 
+        id="description" 
+        formControlName="description"
+        rows="4"
+        style="resize: vertical;"
+        [class.is-invalid]="submitted && f['description'].errors"
+      ></textarea>
+      <div class="invalid-feedback" *ngIf="submitted && f['description'].errors">
+        <div *ngIf="f['description'].errors['required']">Description is required.</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <button class="btn btn-success" type="submit">Add Visit</button>
+    </div>
+  </form>
+
+  <h3>Previous Visits</h3>
+  <table class="table" *ngIf="previousVisits.length > 0">
+    <tbody>
+      <tr *ngFor="let visit of previousVisits">
+        <td class="col-sm-2">{{ visit.date | date:'yyyy-MM-dd' }}</td>
+        <td style="white-space: pre-line">{{ visit.description }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="previousVisits.length === 0" class="text-muted">No previous visits</p>
+</div>
