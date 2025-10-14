@@ -7,7 +7,7 @@ import { Owner, Pet, PetType, Visit, Vet } from '../models/models';
   providedIn: 'root'
 })
 export class ClinicService {
-  private apiUrl = '/api';
+  private apiUrl = '';
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +17,7 @@ export class ClinicService {
     if (lastName) {
       params = params.set('lastName', lastName);
     }
-    return this.http.get<Owner[]>(`${this.apiUrl}/owners`, { params });
+    return this.http.get<Owner[]>(`${this.apiUrl}/owners/list`, { params });
   }
 
   getOwner(id: number): Observable<Owner> {
