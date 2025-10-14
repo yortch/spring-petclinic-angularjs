@@ -96,6 +96,7 @@ public class PetResource extends AbstractResourceController {
         @Size(min = 1)
         String name;
         int typeId;
+        PetTypeRequest type;
 
         public int getId() {
             return id;
@@ -122,11 +123,44 @@ public class PetResource extends AbstractResourceController {
         }
 
         public int getTypeId() {
+            // Support both flat typeId and nested type.id
+            if (type != null && type.getId() > 0) {
+                return type.getId();
+            }
             return typeId;
         }
 
         public void setTypeId(int typeId) {
             this.typeId = typeId;
+        }
+
+        public PetTypeRequest getType() {
+            return type;
+        }
+
+        public void setType(PetTypeRequest type) {
+            this.type = type;
+        }
+    }
+
+    static class PetTypeRequest {
+        int id;
+        String name;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
     }
 

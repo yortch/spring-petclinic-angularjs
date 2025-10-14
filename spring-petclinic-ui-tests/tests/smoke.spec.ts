@@ -8,7 +8,7 @@ test.describe('Pet Clinic - Smoke Tests (Angular 20)', () => {
     await page.goto('/');
     
     // Check that the page title is correct
-    await expect(page).toHaveTitle(/PetClinic/);
+    await expect(page).toHaveTitle(/SpringPetclinicAngular/);
     
     // Check that the navigation bar is present
     await expect(page.locator('nav.navbar')).toBeVisible();
@@ -26,8 +26,8 @@ test.describe('Pet Clinic - Smoke Tests (Angular 20)', () => {
     // Check for the welcome message header
     await expect(page.locator('h1:has-text("Welcome to PetClinic")')).toBeVisible();
     
-    // Check for Spring logo
-    await expect(page.locator('img[alt="Spring logo"]')).toBeVisible();
+    // Check for Spring logo (use first() to avoid strict mode violation with multiple logos)
+    await expect(page.locator('img[alt="Spring Logo"]').first()).toBeVisible();
     
     // Check for features section
     await expect(page.locator('h2:has-text("Features")')).toBeVisible();

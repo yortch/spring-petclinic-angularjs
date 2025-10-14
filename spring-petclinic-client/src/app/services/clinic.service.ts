@@ -34,7 +34,7 @@ export class ClinicService {
 
   // Pet operations
   getPetTypes(): Observable<PetType[]> {
-    return this.http.get<PetType[]>(`${this.apiUrl}/pettypes`);
+    return this.http.get<PetType[]>(`${this.apiUrl}/petTypes`);
   }
 
   getPet(ownerId: number, petId: number): Observable<Pet> {
