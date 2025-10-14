@@ -14,8 +14,8 @@ NC='\033[0m' # No Color
 
 echo -e "${YELLOW}Starting Spring PetClinic for UI testing...${NC}"
 
-# Navigate to parent directory
-cd "$(dirname "$0")/.."
+# Navigate to project root (two levels up from scripts directory)
+cd "$(dirname "$0")/../.."
 
 # Check if server is already running
 if curl -s http://localhost:8080 > /dev/null 2>&1; then
