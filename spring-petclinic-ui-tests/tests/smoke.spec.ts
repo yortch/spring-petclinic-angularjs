@@ -68,8 +68,8 @@ test.describe('Pet Clinic - Smoke Tests (Angular 20)', () => {
     const nav = page.locator('nav.navbar');
     await expect(nav).toHaveCSS('background-color', 'rgb(52, 48, 45)'); // #34302D
     
-    // Check banner has green background (#6db33f)
-    const banner = page.locator('.banner, .jumbotron');
+    // Check welcome banner has green background (#6db33f)
+    const banner = page.locator('.welcome-banner');
     await expect(banner).toHaveCSS('background-color', 'rgb(109, 179, 63)'); // #6db33f
   });
 });

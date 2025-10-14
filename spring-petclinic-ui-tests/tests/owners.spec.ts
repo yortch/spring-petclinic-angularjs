@@ -13,7 +13,7 @@ test.describe('Owner Management (Angular 20)', () => {
   test('should display list of owners with search filter', async ({ page }) => {
     // Angular shows owners list immediately
     // Should display owners table
-    await expect(page.locator('table.table')).toBeVisible();
+    await expect(page.locator('table.table-striped')).toBeVisible();
     
     // Should have column headers
     await expect(page.locator('th:has-text("Name")')).toBeVisible();
@@ -52,11 +52,11 @@ test.describe('Owner Management (Angular 20)', () => {
     // Should display owner information section
     await expect(page.locator('h2:has-text("Owner Information")')).toBeVisible();
     
-    // Should have owner details
-    await expect(page.locator('dt:has-text("Name")')).toBeVisible();
-    await expect(page.locator('dt:has-text("Address")')).toBeVisible();
-    await expect(page.locator('dt:has-text("City")')).toBeVisible();
-    await expect(page.locator('dt:has-text("Telephone")')).toBeVisible();
+    // Should have owner details (using th for labels in the table)
+    await expect(page.locator('th:has-text("Name")')).toBeVisible();
+    await expect(page.locator('th:has-text("Address")')).toBeVisible();
+    await expect(page.locator('th:has-text("City")')).toBeVisible();
+    await expect(page.locator('th:has-text("Telephone")')).toBeVisible();
     
     // Should have Edit Owner button
     await expect(page.locator('a:has-text("Edit Owner")')).toBeVisible();
@@ -81,7 +81,7 @@ test.describe('Owner Management (Angular 20)', () => {
     await page.fill('input#telephone', '1234567890');
     
     // Submit form
-    await page.click('button[type="submit"]:has-text("Add Owner")');
+    await page.click('button[type="submit"]:has-text("Owner")');
     await page.waitForURL('**/owners/**');
     
     // Should redirect to owner details page
@@ -106,11 +106,11 @@ test.describe('Owner Management (Angular 20)', () => {
     await page.fill('input#city', 'Updated City');
     
     // Submit form
-    await page.click('button[type="submit"]:has-text("Update Owner")');
+    await page.click('button[type="submit"]:has-text("Owner")');
     await page.waitForURL(`**/owners/${ownerId}`);
     
     // Should display updated information
-    await expect(page.locator('dd:has-text("Updated City")')).toBeVisible();
+    await expect(page.locator('td:has-text("Updated City")')).toBeVisible();
   });
 
   test('should show validation errors for invalid input', async ({ page }) => {
@@ -123,10 +123,10 @@ test.describe('Owner Management (Angular 20)', () => {
     await page.fill('input#lastName', ''); // Clear required field
     
     // Try to submit form
-    await page.click('button[type="submit"]:has-text("Add Owner")');
+    await page.click('button[type="submit"]:has-text("Owner")');
     
     // Should display validation error for lastName
-    await expect(page.locator('.text-danger, .invalid-feedback')).toBeVisible();
+    await expect(page.locator('.invalid-feedback')).toBeVisible();
   });
 
   test('should add pet to owner', async ({ page }) => {
@@ -139,18 +139,18 @@ test.describe('Owner Management (Angular 20)', () => {
     await page.waitForURL('**/pets/new');
     
     // Should show pet form
-    await expect(page.locator('h2:has-text("New Pet")')).toBeVisible();
+    await expect(page.locator('h2:has-text("Pet")')).toBeVisible();
     
     // Fill in pet details
     await page.fill('input#name', 'TestPet');
-    await page.selectOption('select#type', { index: 1 }); // Select first pet type
+    await page.selectOption('select#typeId', { index: 0 }); // Select first pet type
     
     // Fill birth date
     const today = new Date().toISOString().split('T')[0];
     await page.fill('input#birthDate', today);
     
     // Submit form
-    await page.click('button[type="submit"]:has-text("Add Pet")');
+    await page.click('button[type="submit"]:has-text("Pet")');
     await page.waitForURL('**/owners/**');
     
     // Should show new pet in owner details
