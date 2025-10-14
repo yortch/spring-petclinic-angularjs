@@ -1,0 +1,18 @@
+h2 {
+  color: #34302D;
+  margin-bottom: 1.5rem;
+}
+
+.table {
+  background-color: white;
+
+  a {
+    color: #6db33f;
+    text-decoration: none;
+
+    &:hover {
+      color: #5fa134;
+      text-decoration: underline;
+    }
+  }
+}

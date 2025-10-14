@@ -1,0 +1,195 @@
+/* Spring PetClinic Green Theme */
+
+/* Color Variables - Matching Original Theme */
+$spring-green: #6db33f;
+$spring-dark-green: #5fa134;
+$spring-brown: #34302D;
+$spring-grey: #838789;
+$spring-light-grey: #f1f1f1;
+
+/* Global Styles */
+body {
+  background-color: $spring-light-grey;
+  color: $spring-brown;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Navigation Bar */
+.navbar {
+  background-color: $spring-brown !important;
+  margin-bottom: 0;
+  
+  .navbar-brand {
+    color: $spring-light-grey !important;
+    
+    &:hover, &:focus {
+      color: $spring-light-grey !important;
+      background-color: $spring-green;
+    }
+  }
+  
+  .nav-link {
+    color: $spring-light-grey !important;
+    
+    &:hover, &:focus {
+      color: $spring-light-grey !important;
+      background-color: $spring-green !important;
+    }
+    
+    &.active {
+      background-color: $spring-green !important;
+      color: $spring-light-grey !important;
+    }
+  }
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: $spring-brown !important;
+  border-color: $spring-green !important;
+  border-width: 2px;
+  color: $spring-light-grey !important;
+  
+  &:hover, &:focus, &:active {
+    background-color: $spring-brown !important;
+    border-color: $spring-brown !important;
+  }
+}
+
+.btn-default {
+  background-color: $spring-brown;
+  border-color: $spring-green;
+  border-width: 2px;
+  color: $spring-light-grey;
+  
+  &:hover, &:focus, &:active {
+    background-color: $spring-brown;
+    border-color: $spring-brown;
+  }
+}
+
+/* Tables */
+.table {
+  thead {
+    tr th {
+      background-color: #{mix(white, $spring-brown, 3%)};
+      color: $spring-light-grey;
+      border-color: $spring-brown;
+    }
+  }
+  
+  td {
+    vertical-align: middle;
+    border-color: $spring-brown;
+  }
+}
+
+/* Forms */
+.form-control:focus {
+  border-color: $spring-green;
+  box-shadow: 0 0 0 0.2rem rgba(109, 179, 63, 0.25);
+}
+
+/* Links */
+a {
+  color: $spring-dark-green;
+  
+  &:hover, &:focus {
+    color: $spring-dark-green;
+  }
+}
+
+/* Container */
+.container {
+  margin-top: 20px;
+  margin-bottom: 100px;
+}
+
+/* Welcome Page */
+.welcome-banner {
+  background-color: $spring-green;
+  color: $spring-brown;
+  padding: 40px 20px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Footer */
+footer {
+  margin-top: 50px;
+  padding: 20px 0;
+  text-align: center;
+  color: $spring-grey;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: $spring-brown;
+}
+
+h1 {
+  margin-bottom: 15px;
+}
+
+/* Alerts */
+.alert-success {
+  background-color: rgba(109, 179, 63, 0.1);
+  border-color: $spring-green;
+  color: $spring-dark-green;
+}
+
+/* Loading Spinner */
+.spinner-border {
+  color: $spring-green;
+}
+
+/* Error Messages */
+.text-danger {
+  color: #dc3545 !important;
+}
+
+/* Card Styles */
+.card {
+  border-color: $spring-grey;
+  
+  .card-header {
+    background-color: $spring-brown;
+    color: $spring-light-grey;
+  }
+}
+
+/* Tab Navigation */
+.nav-tabs {
+  border-color: $spring-brown;
+  
+  .nav-link {
+    color: $spring-grey;
+    
+    &.active {
+      background-color: $spring-brown;
+      color: $spring-light-grey;
+      border-color: $spring-brown;
+    }
+    
+    &:hover {
+      border-color: $spring-grey;
+    }
+  }
+}
+
+/* Pagination */
+.pagination {
+  .page-item.active .page-link {
+    background-color: $spring-brown;
+    border-color: $spring-green;
+  }
+  
+  .page-link {
+    color: $spring-dark-green;
+    
+    &:hover {
+      color: $spring-brown;
+      background-color: $spring-light-grey;
+    }
+  }
+}

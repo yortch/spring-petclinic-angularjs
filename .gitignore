@@ -18,3 +18,7 @@ settings.json
 
 # Node.js
 package-lock.json
+node_modules/
+playwright-report/
+test-results/
+test-output.log

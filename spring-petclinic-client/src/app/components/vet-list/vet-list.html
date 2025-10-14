@@ -1,0 +1,19 @@
+<h2>Veterinarians</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Specialties</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let vet of vets">
+      <td>{{vet.firstName}} {{vet.lastName}}</td>
+      <td>
+        <span *ngFor="let specialty of vet.specialties; let last = last">
+          {{specialty.name}}{{last ? '' : ', '}}
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>

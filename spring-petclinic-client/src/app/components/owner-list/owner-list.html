@@ -1,0 +1,44 @@
+<h2>Owners</h2>
+
+<form onsubmit="return false;" style="max-width: 20em; margin-top: 2em;">
+  <div class="mb-3">
+    <input 
+      type="text" 
+      class="form-control" 
+      placeholder="Search Filter" 
+      [(ngModel)]="query"
+      name="query"
+    />
+  </div>
+</form>
+
+<a routerLink="/owners/new" class="btn btn-success mb-3">Add Owner</a>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th class="d-none d-md-table-cell">Address</th>
+      <th>City</th>
+      <th>Telephone</th>
+      <th class="d-none d-sm-table-cell">Pets</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let owner of filterOwners()">
+      <td>
+        <a [routerLink]="['/owners', owner.id]">
+          {{owner.firstName}} {{owner.lastName}}
+        </a>
+      </td>
+      <td class="d-none d-md-table-cell">{{owner.address}}</td>
+      <td>{{owner.city}}</td>
+      <td>{{owner.telephone}}</td>
+      <td class="d-none d-sm-table-cell">
+        <span *ngFor="let pet of owner.pets; let last = last">
+          {{pet.name}}{{last ? '' : ', '}}
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,10 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.springframework.samples.petclinic.UpgradeSpringBoot33
+displayName: Upgrade to Spring Boot 3.3
+description: Upgrades Spring Boot from 2.x to 3.3, including Java 17 to 21 migration
+recipeList:
+  - org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_3
+  - org.openrewrite.java.migrate.Java8toJava11
+  - org.openrewrite.java.migrate.UpgradeToJava17
+  - org.openrewrite.java.migrate.UpgradeToJava21
