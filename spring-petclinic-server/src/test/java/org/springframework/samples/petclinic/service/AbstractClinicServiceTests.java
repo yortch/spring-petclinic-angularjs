@@ -15,7 +15,7 @@
  */
 package org.springframework.samples.petclinic.service;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
@@ -162,7 +162,7 @@ public abstract class AbstractClinicServiceTests {
 	    Vet vet = EntityUtils.getById(vets, Vet.class, 3);
 	    assertThat(vet.getLastName()).isEqualTo("Douglas");
 	    assertThat(vet.getNrOfSpecialties()).isEqualTo(2);
-	    assertThat(vet.getSpecialties().get(0).getName()).isEqualTo("dentistry");
+	    assertThat(vet.getSpecialties().getFirst().getName()).isEqualTo("dentistry");
 	    assertThat(vet.getSpecialties().get(1).getName()).isEqualTo("surgery");
 	}
 
