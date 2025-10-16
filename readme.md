@@ -4,6 +4,9 @@
 
 This [guide](upgrade.md) includes GitHub Copilot prompts that can be used to modernize this legacy Java 8 and Spring Boot 2.4 application into Java 21 and Spring Boot 3.5 in the backend and to modernize the UI from AngularJS into a modern Angular version while increasing JUnit test coverage and adding Playwright UI tests using a phased approach.
 
+## Product Requirements and Business Documentation
+📋 **[Product Requirements Document (PRD)](PRD.md)** - Comprehensive business requirements, user stories, and technical specifications for the Spring PetClinic application.
+
 ## Understanding the Spring Petclinic application with a few diagrams
 [See the presentation here](http://fr.slideshare.net/AntoineRey/spring-framework-petclinic-sample-application)
 
