@@ -1,6 +1,6 @@
 # Full Spring Pet Clinic App Modernization guide for GitHub Copilot
 
-This file includes the script that can be used to modernize a legacy Java 8 and Spring Boot 2.4
+This file includes the GitHub Copilot prompts that can be used to modernize a legacy Java 8 and Spring Boot 2.4
 application into Java 21 and Spring Boot 3.5 in the backend and to modernize the UI from AngularJS
 into a modern Angular version while increasing junit test coverage and adding Playwright UI tests using a phased approach:
 
