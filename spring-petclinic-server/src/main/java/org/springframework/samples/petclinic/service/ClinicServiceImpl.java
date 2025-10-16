@@ -15,7 +15,6 @@
  */
 package org.springframework.samples.petclinic.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.*;
 import org.springframework.samples.petclinic.repository.OwnerRepository;
@@ -24,8 +23,8 @@ import org.springframework.samples.petclinic.repository.VetRepository;
 import org.springframework.samples.petclinic.repository.VisitRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.cache.annotation.Cacheable;
 
-import javax.cache.annotation.CacheResult;
 import java.util.Collection;
 
 /**
@@ -42,7 +41,6 @@ public class ClinicServiceImpl implements ClinicService {
     private final OwnerRepository ownerRepository;
     private final VisitRepository visitRepository;
 
-    @Autowired
     public ClinicServiceImpl(PetRepository petRepository, VetRepository vetRepository, OwnerRepository ownerRepository, VisitRepository visitRepository) {
         this.petRepository = petRepository;
         this.vetRepository = vetRepository;
@@ -95,7 +93,7 @@ public class ClinicServiceImpl implements ClinicService {
 
     @Override
     @Transactional(readOnly = true)
-    @CacheResult(cacheName = "vets")
+    @Cacheable("vets")
     public Collection<Vet> findVets() throws DataAccessException {
         return vetRepository.findAll();
     }
