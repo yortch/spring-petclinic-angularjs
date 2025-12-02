@@ -15,7 +15,6 @@
  */
 package org.springframework.samples.petclinic.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.*;
 import org.springframework.samples.petclinic.repository.OwnerRepository;
@@ -42,7 +41,6 @@ public class ClinicServiceImpl implements ClinicService {
     private final OwnerRepository ownerRepository;
     private final VisitRepository visitRepository;
 
-    @Autowired
     public ClinicServiceImpl(PetRepository petRepository, VetRepository vetRepository, OwnerRepository ownerRepository, VisitRepository visitRepository) {
         this.petRepository = petRepository;
         this.vetRepository = vetRepository;

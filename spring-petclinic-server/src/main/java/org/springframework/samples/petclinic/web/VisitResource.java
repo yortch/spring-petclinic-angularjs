@@ -15,7 +15,6 @@
  */
 package org.springframework.samples.petclinic.web;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.samples.petclinic.model.Visit;
 import org.springframework.samples.petclinic.service.ClinicService;
@@ -26,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 /**
  * @author Juergen Hoeller
@@ -39,7 +38,6 @@ public class VisitResource extends AbstractResourceController {
 
     private final ClinicService clinicService;
 
-    @Autowired
     public VisitResource(ClinicService clinicService) {
         this.clinicService = clinicService;
     }
@@ -48,14 +46,14 @@ public class VisitResource extends AbstractResourceController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void create(
             @Valid @RequestBody Visit visit,
-            @PathVariable("petId") int petId) {
+            @PathVariable int petId) {
 
         clinicService.findPetById(petId).addVisit(visit);
         clinicService.saveVisit(visit);
     }
 
     @GetMapping("/owners/{ownerId}/pets/{petId}/visits")
-    public Object visits(@PathVariable("petId") int petId) {
+    public Object visits(@PathVariable int petId) {
         return clinicService.findPetById(petId).getVisits();
     }
 }

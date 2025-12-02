@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Configuration;
 public class CacheConfig {
 
     @Bean
-    public JCacheManagerCustomizer cacheManagerCustomizer() {
+    JCacheManagerCustomizer cacheManagerCustomizer() {
         return cacheManager -> {
             CacheConfiguration<Object, Object> config = CacheConfigurationBuilder
                 .newCacheConfigurationBuilder(Object.class, Object.class,
