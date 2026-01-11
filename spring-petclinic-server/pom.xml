@@ -16,6 +16,13 @@
     </properties>
 
     <dependencies>
+        <!-- AngularJS Client module -->
+        <dependency>
+            <groupId>org.springframework.samples</groupId>
+            <artifactId>spring-petclinic-client</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
