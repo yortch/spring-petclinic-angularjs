@@ -36,7 +36,7 @@ public class PetResourceTests {
 
         mvc.perform(get("/owners/2/pets/2").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(2))
                 .andExpect(jsonPath("$.name").value("Basil"))
                 .andExpect(jsonPath("$.type.id").value(6));
