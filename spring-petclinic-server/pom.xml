@@ -58,12 +58,10 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Client dependency temporarily commented out for upgrade
         <dependency>
             <groupId>org.springframework.samples</groupId>
             <artifactId>spring-petclinic-client</artifactId>
         </dependency>
-        -->
 
         <!-- JDBC drivers -->
         <dependency>
