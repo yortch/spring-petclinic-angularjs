@@ -17,6 +17,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>2.3.3</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
@@ -53,10 +58,12 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Client dependency temporarily commented out for upgrade
         <dependency>
             <groupId>org.springframework.samples</groupId>
             <artifactId>spring-petclinic-client</artifactId>
         </dependency>
+        -->
 
         <!-- JDBC drivers -->
         <dependency>
@@ -67,6 +74,11 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
             <scope>runtime</scope>
         </dependency>
 
